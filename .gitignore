@@ -1,0 +1,26 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Generated scripts
+run-ebird-mcp-server.sh
+
+# macOS system files
+.DS_Store
+
+# Editor directories and files
+.idea
+.vscode
+*.swp
+*.swo

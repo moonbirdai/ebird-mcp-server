@@ -1,0 +1,28 @@
+{
+  "name": "ebird-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for eBird API integration",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test-ebird.js"
+  },
+  "keywords": [
+    "ebird",
+    "mcp",
+    "model",
+    "context",
+    "protocol",
+    "api",
+    "birds",
+    "birdwatching"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0",
+    "commander": "^11.0.0",
+    "node-fetch": "^3.3.1"
+  }
+}

@@ -1,0 +1,23 @@
+# Test files
+test-ebird.js
+test.sh
+
+# Documentation files
+examples.md
+
+# Installation scripts
+claude_setup.sh
+install.sh
+
+# Git files
+.git
+.gitignore
+
+# macOS system files
+.DS_Store
+
+# Editor directories and files
+.idea
+.vscode
+*.swp
+*.swo
