@@ -2,6 +2,33 @@
 
 A Model Context Protocol (MCP) server for integrating with the eBird API. This server allows AI assistants, like Claude, to access bird observation data, hotspots, and taxonomy information from eBird.
 
+## Quick Setup for Claude Desktop
+
+Add this configuration to your Claude Desktop config file (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "ebird-api": {
+      "command": "npx",
+      "args": [
+        "ebird-mcp-server",
+        "--api-key",
+        "YOUR_EBIRD_API_KEY"
+      ]
+    }
+  }
+}
+```
+
+Make sure to:
+1. Replace `YOUR_EBIRD_API_KEY` with your actual eBird API key
+2. Create the config file if it doesn't exist
+3. Install the package globally with `npm install -g ebird-mcp-server` if you haven't already
+4. Restart Claude Desktop after saving the changes
+
+> **Note**: You can get an eBird API key from [eBird API Key Request](https://ebird.org/api/keygen)
+
 ## Features
 
 The eBird MCP server provides access to the following eBird data:
