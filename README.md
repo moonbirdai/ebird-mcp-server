@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/moonbirdai-ebird-mcp-server-badge.png)](https://mseep.ai/app/moonbirdai-ebird-mcp-server)
+
 # eBird MCP Server
 
 A Model Context Protocol (MCP) server for integrating with the eBird API. This server allows AI assistants, like Claude, to access bird observation data, hotspots, and taxonomy information from eBird.
