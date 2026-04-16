@@ -35,7 +35,7 @@ if command -v jq >/dev/null 2>&1; then
   TMP_FILE=$(mktemp)
   
   # Update the config file
-  jq --arg script_dir "$SCRIPT_DIR" --arg api_key "$EBIRD_API_KEY" '.mcpServers += {"ebird-api": {"command": "node", "args": ["$script_dir/index.js", "--api-key", "$api_key"]}}' "$CONFIG_FILE" > "$TMP_FILE"
+  jq --arg script_dir "$SCRIPT_DIR" --arg api_key "$EBIRD_API_KEY" '.mcpServers += {"ebird-api": {"command": "node", "args": [($script_dir + "/index.js"), "--api-key", $api_key]}}' "$CONFIG_FILE" > "$TMP_FILE"
   
   # Replace the original file
   mv "$TMP_FILE" "$CONFIG_FILE"
