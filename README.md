@@ -4,7 +4,18 @@ A Model Context Protocol (MCP) server for integrating with the eBird API. This s
 
 ## Quick Setup for Claude Desktop
 
-Add this configuration to your Claude Desktop config file (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+You can get an eBird API key from [eBird API Key Request](https://ebird.org/api/keygen).
+
+Claude Desktop's config file lives at:
+
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+Pick one of the two options below, save the config, and **restart Claude Desktop**.
+
+### Option A — Run via `npx` (no install step)
+
+`npx` will download and run the package on first launch. Requires Node.js on your `PATH`.
 
 ```json
 {
@@ -12,6 +23,7 @@ Add this configuration to your Claude Desktop config file (`~/Library/Applicatio
     "ebird-api": {
       "command": "npx",
       "args": [
+        "-y",
         "ebird-mcp-server",
         "--api-key",
         "YOUR_EBIRD_API_KEY"
@@ -21,13 +33,40 @@ Add this configuration to your Claude Desktop config file (`~/Library/Applicatio
 }
 ```
 
-Make sure to:
-1. Replace `YOUR_EBIRD_API_KEY` with your actual eBird API key
-2. Create the config file if it doesn't exist
-3. Install the package globally with `npm install -g ebird-mcp-server` if you haven't already
-4. Restart Claude Desktop after saving the changes
+### Option B — Run from a local clone
 
-> **Note**: You can get an eBird API key from [eBird API Key Request](https://ebird.org/api/keygen)
+Use this if you want to pin a specific version, run from a fork, or work offline.
+
+```bash
+git clone https://github.com/moonbirdai/ebird-mcp-server.git
+cd ebird-mcp-server
+npm install
+```
+
+Then point Claude Desktop at the cloned `index.js` directly (use the absolute path):
+
+```json
+{
+  "mcpServers": {
+    "ebird-api": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/ebird-mcp-server/index.js",
+        "--api-key",
+        "YOUR_EBIRD_API_KEY"
+      ]
+    }
+  }
+}
+```
+
+On macOS, the included helper script writes this config for you:
+
+```bash
+./claude_setup.sh YOUR_EBIRD_API_KEY
+```
+
+> Replace `YOUR_EBIRD_API_KEY` with your actual eBird API key in either option.
 
 ## Features
 
@@ -49,48 +88,30 @@ The eBird MCP server provides access to the following eBird data:
 
 ## Installation
 
-### For Claude Desktop
+See [Quick Setup for Claude Desktop](#quick-setup-for-claude-desktop) above for the common path.
 
-1. Clone this repository or download the files
-2. Run the Claude Desktop setup script:
+### For other MCP clients
 
-```bash
-chmod +x claude_setup.sh
-./claude_setup.sh YOUR_EBIRD_API_KEY
-```
+Any MCP client that can spawn a stdio server will work. Either:
 
-3. Restart Claude Desktop
+- invoke via `npx -y ebird-mcp-server --api-key YOUR_EBIRD_API_KEY`, or
+- clone, `npm install`, and invoke `node /absolute/path/to/index.js --api-key YOUR_EBIRD_API_KEY`.
 
-### For Other MCP Clients
+### Global install (optional)
 
-1. Clone this repository or download the files
-2. Run the installation script:
+With the `bin` entry shipped in the package, a global install exposes the `ebird-mcp-server` command on your `PATH`:
 
 ```bash
-chmod +x install.sh
-./install.sh YOUR_EBIRD_API_KEY
+npm install -g ebird-mcp-server
+ebird-mcp-server --api-key YOUR_EBIRD_API_KEY
 ```
 
-3. The server is now installed and can be run with:
+### Convenience scripts
 
-```bash
-./run-ebird-mcp-server.sh
-```
+The repo ships two helper scripts for people who prefer not to hand-edit config:
 
-### Manual Installation
-
-1. Clone this repository or download the files
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Run the server:
-
-```bash
-node index.js --api-key YOUR_EBIRD_API_KEY
-```
+- `./claude_setup.sh YOUR_EBIRD_API_KEY` — writes the Claude Desktop config for macOS (requires `jq`).
+- `./install.sh YOUR_EBIRD_API_KEY` — runs `npm install` and creates a `./run-ebird-mcp-server.sh` wrapper for other MCP clients.
 
 ## Available Tools
 
